@@ -24,8 +24,8 @@ class Generator(object):
         self.model = kr.Model(latent_vector, model_output)
 
     def save_images(self, epoch):
-        if not os.path.exists('./results'):
-            os.makedirs('./results')
+        if not os.path.exists('./gan_results'):
+            os.makedirs('./gan_results')
 
         images = []
         for _ in range(HP.save_image_size):
@@ -34,11 +34,11 @@ class Generator(object):
 
             images.append(np.hstack(fake_images))
 
-        image.save_img(path='./results/%d fake.png' % epoch, x=np.vstack(images))
+        image.save_img(path='./gan_results/%d fake.png' % epoch, x=np.vstack(images))
 
     def save(self):
         if not os.path.exists('./models'):
-            os.makedirs('models')
+            os.makedirs('./models')
 
         self.model.save_weights('./models/generator.h5')
 

@@ -20,12 +20,10 @@ save_image_size = 16
 epochs = 200
 
 train_data_size = -1
-test_data_size = 1000
+test_data_size = 100
 
 evaluate_model = False
 epochs_per_evaluate = 10
-
-main_function = Main.save_searcher_results
 
 train_distribution_function = tf.random.normal
 train_cdf = ss.norm.cdf
@@ -60,6 +58,8 @@ latent_size = 16
 
 search_optimizer = None
 search_optimizer_learning_rates = [0.0001, 0.001, 0.01]
+
+use_latent_regulation_loss = True
 latent_regulation_loss_weight = None
 latent_regulation_loss_weights = [0.01, 0.1, 1.0]
 
@@ -80,3 +80,8 @@ resampling_function = Regulations.logistic_cutoff
 #resampling_function = Regulations.boundary_resampling
 
 resampling_hyperparameter = 0
+
+
+
+main_function = Main.train_classifier()
+

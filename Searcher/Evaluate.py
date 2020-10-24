@@ -8,11 +8,15 @@ import os
 
 
 def get_accuracy(classifier: kr.Model):
-    folder_name = './learn' + str(HP.search_optimizer.learning_rate.numpy())
+    folder_name = './searcher_results/learning_rate_' + str(HP.search_optimizer.learning_rate.numpy())
+    if HP.use_latent_regulation_loss:
+        folder_name += '/' + HP.regulation_function.__name__ + str(HP.latent_regulation_loss_weight)
+    else:
+        folder_name += '/no_regulation_loss'
     if HP.use_resampling:
         folder_name += '/' + HP.resampling_function.__name__ + str(HP.resampling_hyperparameter)
     else:
-        folder_name += '/' + HP.regulation_function.__name__ + str(HP.latent_regulation_loss_weight)
+        folder_name += '/no_resampling'
 
     generated_images = np.load(folder_name + '/generated_images.npy')
     real_labels = np.load(folder_name + '/real_labels.npy')
@@ -40,11 +44,15 @@ def get_accuracy(classifier: kr.Model):
 
 
 def get_l1_l2_loss():
-    folder_name = './learn' + str(HP.search_optimizer.learning_rate.numpy())
+    folder_name = './searcher_results/learning_rate_' + str(HP.search_optimizer.learning_rate.numpy())
+    if HP.use_latent_regulation_loss:
+        folder_name += '/' + HP.regulation_function.__name__ + str(HP.latent_regulation_loss_weight)
+    else:
+        folder_name += '/no_regulation_loss'
     if HP.use_resampling:
         folder_name += '/' + HP.resampling_function.__name__ + str(HP.resampling_hyperparameter)
     else:
-        folder_name += '/' + HP.regulation_function.__name__ + str(HP.latent_regulation_loss_weight)
+        folder_name += '/no_resampling'
 
     generated_images = np.load(folder_name + '/generated_images.npy')
     real_images = np.load(folder_name + '/real_images.npy')
@@ -56,11 +64,15 @@ def get_l1_l2_loss():
 
 
 def latent_ks_test():
-    folder_name = './learn' + str(HP.search_optimizer.learning_rate.numpy())
+    folder_name = './searcher_results/learning_rate_' + str(HP.search_optimizer.learning_rate.numpy())
+    if HP.use_latent_regulation_loss:
+        folder_name += '/' + HP.regulation_function.__name__ + str(HP.latent_regulation_loss_weight)
+    else:
+        folder_name += '/no_regulation_loss'
     if HP.use_resampling:
         folder_name += '/' + HP.resampling_function.__name__ + str(HP.resampling_hyperparameter)
     else:
-        folder_name += '/' + HP.regulation_function.__name__ + str(HP.latent_regulation_loss_weight)
+        folder_name += '/no_resampling'
 
     latent_vectors = np.load(folder_name + '/latent_vectors.npy')
 
@@ -89,11 +101,15 @@ def save_searcher_results(generator: kr.Model, discriminator: kr.Model, dataset:
         real_labels_set.append(real_labels)
         real_images_set.append(real_images)
 
-    folder_name = './learning_rate_' + str(HP.search_optimizer.learning_rate.numpy())
+    folder_name = './searcher_results/learning_rate_' + str(HP.search_optimizer.learning_rate.numpy())
+    if HP.use_latent_regulation_loss:
+        folder_name += '/' + HP.regulation_function.__name__ + str(HP.latent_regulation_loss_weight)
+    else:
+        folder_name += '/no_regulation_loss'
     if HP.use_resampling:
         folder_name += '/' + HP.resampling_function.__name__ + str(HP.resampling_hyperparameter)
     else:
-        folder_name += '/' + HP.regulation_function.__name__ + str(HP.latent_regulation_loss_weight)
+        folder_name += '/no_resampling'
 
     if not os.path.exists(folder_name):
         os.makedirs(folder_name)

@@ -9,13 +9,17 @@ def _step(input_images, latent_vectors: tf.Variable, generator: kr.Model, discri
         generated_images = generator(latent_vectors.value())
 
         data_difference_losses = HP.dif_function(input_images, generated_images)
-        latent_regulation_losses = HP.regulation_function(
-            train_vectors=HP.train_distribution_function([latent_vectors.shape[0], HP.sampling_size]),
-            latent_vectors=latent_vectors,
-            generator=generator,
-            discriminator=discriminator)
 
-        losses = data_difference_losses + HP.latent_regulation_loss_weight * latent_regulation_losses
+        if HP.use_latent_regulation_loss:
+            latent_regulation_losses = HP.regulation_function(
+                train_vectors=HP.train_distribution_function([latent_vectors.shape[0], HP.sampling_size]),
+                latent_vectors=latent_vectors,
+                generator=generator,
+                discriminator=discriminator)
+            losses = data_difference_losses + HP.latent_regulation_loss_weight * latent_regulation_losses
+        else:
+            losses = data_difference_losses
+
     grads = tape.gradient(losses, [latent_vectors])
 
     return grads, losses, generated_images
