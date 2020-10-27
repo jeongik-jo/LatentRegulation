@@ -58,7 +58,12 @@ def save_searcher_results():
             HP.latent_regulation_loss_weight = latent_regulation_loss_weight
             print('start')
             print('learning rate: ' + str(learning_rate))
-            print('latent regulation loss weight: ' + str(latent_regulation_loss_weight))
+            if HP.use_latent_regulation_loss:
+                print(HP.regulation_function.__name__)
+                print('latent regulation loss weight: ' + str(latent_regulation_loss_weight))
+            if HP.use_resampling:
+                print(HP.resampling_function.__name__)
+                print('resampling hyperparameter: ' + str(HP.resampling_hyperparameter))
             start = time.time()
             Searcher.Main.save_searcher_results()
             print('end. time: ' + str(time.time() - start)[:7] + ' sec')
