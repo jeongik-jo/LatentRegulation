@@ -64,8 +64,8 @@ def get_fid(generator: kr.Model, test_dataset: tf.data.Dataset):
 
 
 def save_graph(fids):
-    if not os.path.exists('./results'):
-        os.makedirs('./results')
+    if not os.path.exists('./gan_results'):
+        os.makedirs('./gan_results')
 
     epochs = [i + 1 for i in range(len(fids))]
 
@@ -73,5 +73,5 @@ def save_graph(fids):
     plt.xlabel('epochs')
     plt.ylabel('average fid')
 
-    plt.savefig('./results/fids.png')
-    np.savetxt('./results/fids.txt', np.array(fids), fmt='%f')
+    plt.savefig('./gan_results/fids.png')
+    np.savetxt('./gan_results/fids.txt', np.array(fids), fmt='%f')

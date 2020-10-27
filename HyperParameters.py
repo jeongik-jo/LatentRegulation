@@ -83,5 +83,5 @@ resampling_hyperparameter = 0
 
 
 
-main_function = Main.train_classifier()
+main_function = Main.train_classifier
 

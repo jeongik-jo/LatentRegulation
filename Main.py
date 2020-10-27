@@ -56,7 +56,9 @@ def save_searcher_results():
         for j, latent_regulation_loss_weight in enumerate(HP.latent_regulation_loss_weights):
             HP.search_optimizer = tf.optimizers.Adam(learning_rate=learning_rate)
             HP.latent_regulation_loss_weight = latent_regulation_loss_weight
-            print('start learning: ' + str(learning_rate) + '\nloss: ' + str(latent_regulation_loss_weight))
+            print('start')
+            print('learning rate: ' + str(learning_rate))
+            print('latent regulation loss weight: ' + str(latent_regulation_loss_weight))
             start = time.time()
             Searcher.Main.save_searcher_results()
             print('end. time: ' + str(time.time() - start)[:7] + ' sec')
