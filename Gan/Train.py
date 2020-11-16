@@ -11,11 +11,11 @@ def _train(generator: kr.Model, discriminator: kr.Model, data: tf.Tensor):
         latent_vectors = HP.train_distribution_function([real_images.shape[0], HP.latent_vector_dim])
         fake_images = generator(latent_vectors, training=True)
 
-        real_logits = discriminator(real_images, training=True)
-        fake_logits = discriminator(fake_images, training=True)
+        real_adversarial_values = discriminator(real_images, training=True)
+        fake_adversarial_values = discriminator(fake_images, training=True)
 
-        discriminator_loss = tf.reduce_mean(tf.square(real_logits - 1) + tf.square(fake_logits))
-        generator_loss = tf.reduce_mean(tf.square(fake_logits - 1))
+        discriminator_loss = tf.reduce_mean(tf.square(real_adversarial_values - 1) + tf.square(fake_adversarial_values))
+        generator_loss = tf.reduce_mean(tf.square(fake_adversarial_values - 1))
 
     HP.discriminator_optimizer.apply_gradients(
         zip(tape.gradient(discriminator_loss, discriminator.trainable_variables),

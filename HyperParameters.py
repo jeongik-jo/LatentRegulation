@@ -20,7 +20,7 @@ save_image_size = 16
 epochs = 200
 
 train_data_size = -1
-test_data_size = 100
+test_data_size = -1
 
 evaluate_model = False
 epochs_per_evaluate = 10

@@ -57,9 +57,9 @@ class Discriminator(object):
             model_output = Layers.HalfResolution(conv_depth=3)(model_output)
 
         model_output = kr.layers.Flatten()(model_output)
-        output_logit = kr.layers.Dense(units=1, activation='linear')(model_output)
+        adversarial_value = kr.layers.Dense(units=1, activation='linear')(model_output)
 
-        self.model = kr.Model(input_image, output_logit)
+        self.model = kr.Model(input_image, adversarial_value)
 
     def save(self):
         if not os.path.exists('./models'):
