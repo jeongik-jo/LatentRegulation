@@ -17,10 +17,10 @@ save_image_size = 16
 
 
 # Shared
-epochs = 50
+epochs = 200
 
 train_data_size = -1
-test_data_size = -1
+test_data_size = 100
 
 evaluate_model = False
 epochs_per_evaluate = 10
@@ -40,7 +40,6 @@ def unn_cdf(xs):
 #train_cdf = unn_cdf
 
 # GAN train
-gp_loss_weight = 0.1
 discriminator_optimizer = tf.optimizers.Adam(learning_rate=0.00001)
 generator_optimizer = tf.optimizers.Adam(learning_rate=0.00001)
 
