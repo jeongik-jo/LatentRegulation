@@ -50,6 +50,15 @@ def test_searcher():
     print('\nl2_losses')
     print(l2_losses)
 
+    print('\n\nmean, var, p, l1, l2, acc')
+    print(vector_means)
+    print(vector_variances)
+    print(p_values)
+    print(l1_losses)
+    print(l2_losses)
+    print(accuracies)
+
+
 
 def save_searcher_results():
     for i, learning_rate in enumerate(HP.search_optimizer_learning_rates):
