@@ -58,7 +58,7 @@ def get_l1_l2_loss():
     real_images = np.load(folder_name + '/real_images.npy')
 
     l1_loss = tf.reduce_mean(tf.reduce_sum(tf.abs(generated_images - real_images), axis=[1, 2, 3]))
-    l2_loss = tf.reduce_mean(tf.sqrt(tf.reduce_sum(tf.square(generated_images - real_images), axis=[1, 2, 3])))
+    l2_loss = tf.reduce_mean(tf.reduce_sum(tf.square(generated_images - real_images), axis=[1, 2, 3]))
 
     return l1_loss, l2_loss
 
